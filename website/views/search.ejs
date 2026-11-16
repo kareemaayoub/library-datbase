@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search books</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card wider">
+        <%- include('nav', { title: 'Search books' }) %>
+
+        <form class="lib-form" action="/search" method="GET">
+            <input type="text" name="keyword" placeholder="Title has..." value="<%= q.keyword || '' %>">
+            <input type="text" name="min" placeholder="Min price" value="<%= q.min || '' %>">
+            <input type="text" name="max" placeholder="Max price" value="<%= q.max || '' %>">
+            <select name="category">
+                <option value="">All categories</option>
+                <% categories.forEach(c => { %>
+                    <option value="<%= c.category_id %>" <%= String(q.category) === String(c.category_id) ? 'selected' : '' %>><%= c.name %></option>
+                <% }) %>
+            </select>
+            <button type="submit" class="btn">Search</button>
+        </form>
+        <% if (error) { %><p class="server-error"><%= error %></p><% } %>
+
+        <% if (books === null) { %>
+            <p class="empty">Fill any of the boxes and press Search. Leave them empty to see every book.</p>
+        <% } else { %>
+            <p class="note"><%= books.length %> book(s) found, cheapest first</p>
+            <% if (books.length === 0) { %>
+                <p class="empty">No book matches this search.</p>
+            <% } else { %>
+                <div class="table-wrap">
+                    <table class="data">
+                        <tr><th>Title</th><th>Price</th><th>Year</th></tr>
+                        <% books.forEach(r => { %>
+                            <tr>
+                                <td><%= r.title %></td>
+                                <td><%= r.price == null ? '' : Number(r.price).toFixed(2) %></td>
+                                <td><%= r.publish_year %></td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+</body>
+</html>

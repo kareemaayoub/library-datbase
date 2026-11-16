@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most borrowed</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card wider">
+        <%- include('nav', { title: 'Most borrowed' }) %>
+
+        <h3>Top 3 books</h3>
+        <% if (topBooks.length === 0) { %>
+            <p class="empty">No loans yet.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Title</th><th>Loans</th></tr>
+                    <% topBooks.forEach(r => { %>
+                        <tr>
+                            <td><%= r.title %></td>
+                            <td><%= r.loans %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+
+        <h3>Member with the most loans</h3>
+        <% if (!topMember) { %>
+            <p class="empty">No loans yet.</p>
+        <% } else { %>
+            <div class="stats">
+                <div class="stat"><span><%= topMember.name %></span><b><%= topMember.loans %> loans</b></div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

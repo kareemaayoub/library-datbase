@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author report</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card wider">
+        <%- include('nav', { title: 'Author report' }) %>
+
+        <h3>Every author and the number of books</h3>
+        <% if (authorCounts.length === 0) { %>
+            <p class="empty">No authors.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Author</th><th>Books</th></tr>
+                    <% authorCounts.forEach(r => { %>
+                        <tr>
+                            <td><%= r.author %></td>
+                            <td><%= r.books %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+
+        <h3>Books whose author and publisher are from the same country</h3>
+        <% if (sameCountry.length === 0) { %>
+            <p class="empty">No such book.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Title</th><th>Author</th><th>Publisher</th><th>Country</th></tr>
+                    <% sameCountry.forEach(r => { %>
+                        <tr>
+                            <td><%= r.title %></td>
+                            <td><%= r.author %></td>
+                            <td><%= r.publisher %></td>
+                            <td><%= r.country %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

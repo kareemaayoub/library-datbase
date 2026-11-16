@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loans</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card wider">
+        <%- include('nav', { title: 'Loans' }) %>
+
+        <h3>Not returned yet</h3>
+        <% if (notReturned.length === 0) { %>
+            <p class="empty">Every book is back.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Book</th><th>Member</th><th>Borrowed on</th></tr>
+                    <% notReturned.forEach(r => { %>
+                        <tr>
+                            <td><%= r.title %></td>
+                            <td><%= r.member %></td>
+                            <td><%= r.loan_date %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+
+        <h3>Members who never borrowed a book</h3>
+        <% if (noLoanMembers.length === 0) { %>
+            <p class="empty">Every member borrowed at least once.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Name</th><th>Email</th></tr>
+                    <% noLoanMembers.forEach(r => { %>
+                        <tr>
+                            <td><%= r.name %></td>
+                            <td><%= r.email %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+
+        <h3>Books that were never borrowed</h3>
+        <% if (neverBorrowed.length === 0) { %>
+            <p class="empty">Every book was borrowed at least once.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Title</th></tr>
+                    <% neverBorrowed.forEach(r => { %>
+                        <tr>
+                            <td><%= r.title %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

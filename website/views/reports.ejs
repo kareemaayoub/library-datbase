@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card wider">
+        <%- include('nav', { title: 'Reports' }) %>
+
+        <h3>Books in each category</h3>
+        <% if (perCategory.length === 0) { %>
+            <p class="empty">No categories.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Category</th><th>Books</th><th>Average price</th></tr>
+                    <% perCategory.forEach(r => { %>
+                        <tr>
+                            <td><%= r.category %></td>
+                            <td><%= r.books %></td>
+                            <td><%= r.avg_price == null ? '' : Number(r.avg_price).toFixed(2) %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+
+        <h3>Authors with at least 2 books</h3>
+        <% if (bigAuthors.length === 0) { %>
+            <p class="empty">No author has 2 books yet.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Author</th><th>Books</th></tr>
+                    <% bigAuthors.forEach(r => { %>
+                        <tr>
+                            <td><%= r.author %></td>
+                            <td><%= r.books %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+
+        <h3>Prices of the whole library</h3>
+        <div class="stats">
+            <div class="stat"><span>Total</span><b><%= stats && stats.total != null ? Number(stats.total).toFixed(2) : '-' %></b></div>
+            <div class="stat"><span>Cheapest</span><b><%= stats && stats.cheapest != null ? Number(stats.cheapest).toFixed(2) : '-' %></b></div>
+            <div class="stat"><span>Most expensive</span><b><%= stats && stats.most_expensive != null ? Number(stats.most_expensive).toFixed(2) : '-' %></b></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="card wider">
+        <%- include('nav', { title: 'Catalogue' }) %>
+
+        <% if (books.length === 0) { %>
+            <p class="empty">No books.</p>
+        <% } else { %>
+            <div class="table-wrap">
+                <table class="data">
+                    <tr><th>Title</th><th>Author</th><th>Publisher</th><th>Category</th><th>Year</th><th>Price</th></tr>
+                    <% books.forEach(r => { %>
+                        <tr>
+                            <td><%= r.title %></td>
+                            <td><%= r.author %></td>
+                            <td><%= r.publisher %></td>
+                            <td><%= r.category %></td>
+                            <td><%= r.publish_year %></td>
+                            <td><%= r.price == null ? '' : Number(r.price).toFixed(2) %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
