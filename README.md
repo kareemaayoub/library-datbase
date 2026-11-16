@@ -23,11 +23,11 @@ We did Part II. The website continues our Lab 3 site (register, login, to-do, bo
 1. Install Node.js and MySQL.
 2. Clone the repository and install the packages:
 ```
-git clone <repository link>
-cd lab4-2304003/website
+git clone https://github.com/kareemaayoub/library-datbase.git
+cd library-datbase/website
 npm install
 ```
-3. Create the databases. Run these from the `lab4-2304003` folder, in this order:
+3. Create the databases. Run these from the main folder of the repository (not from `website`), in this order:
 ```
 mysql -u root -p < website/database/schema.sql
 mysql -u root -p < problem2_DDL.sql
